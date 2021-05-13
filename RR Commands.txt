@@ -1,0 +1,51 @@
+apt install rbenv
+apt install rsync
+gem install docker-sync
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+exec $SHELL
+git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+rbenv install 2.7.1
+rbenv global 2.7.1
+make build
+sudo apt-get install ruby ruby-all-dev
+make sync-up
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	docker-compose build
+	docker-compose run app bundle
+	docker-compose run app rake db:create
+	docker-compose run app rake db:migrate
+	docker-compose run app rake assets:precompile
+	docker-compose up -d
+
+
+
+
+rails s -b 0.0.0.0 -p 8080
+
+
+create role kumar with createdb login password 'password';
+
+
+psql -h db -U postgres
+
+
+
+
+
+
+

@@ -1,0 +1,112 @@
+Simple Steps to Troubleshooting Your Pods
+=========================================
+
+Why Pods fail ?
+
+1. Startup Failure - Containers do not start
+
+2. Runtime Failure - the application code fails after the Container starts up
+
+
+Step1: First of all check the pods
+
+Command: Kubectl get pods
+
+Pods Status like this:
+=====================
+
+1. ImagePullBackOff / ErrorImagePull
+2. Pending
+3. ContainerCreting
+4. Running
+5. CreateContainerConfigError / RunContainerError
+6. CrashLoopBackOff
+
+
+Step2: Check Events Related to Pods or Check your pod logs
+
+Command: Kubectl describe pod <podname>
+
+Command: Kubectl logs --tail=10 pod <podname>
+
+Debugging ImagePullBackOff Pods:
+================================
+Three Scenarios:
+==================
+1. Image name that you provided in the pod spec is invalid
+   Image doesn't exist, type image name 
+
+2. Image tag doesn't exist, try to pull it with its tag that doesn't not exist
+
+3. Specified image is private registry like ECR, GCR or some. It doesn't have to access to pull it
+
+
+Debugging CreateContainerConfigError Pods:
+==========================================
+Error: Configmaps "<configmap>" not found
+=====
+Scenarios:
+===========
+It is not found in Namespace, this error means we're missing a Configmaps or secrets
+To overcome dis error, we can Create a Configmaps and then
+pod should restart and pull in the runtime data from this Configmaps
+
+
+Debugging ContainerCreting Pods:
+================================
+Error: setup failed for volume secret my other secret is not found.
+======
+Unable to mount volumes for pod "secret-pod".
+
+
+
+Debugging Pending Pods:
+=======================
+Error: Insufficient Memory / Insufficient CPU
+======
+Three Scenarios:
+==================
+1. Cluster doesn't have any of enough Resources such as cpu and memory to run the pod.
+2. Current Namespace has Resource Quota object, creating the pod will make the Namespace go over the quota.
+3. pod is bound to a PVC, PVC itself Pending and the problem is bound to this PVC then it will stuck.
+
+
+Debugging CrashLoopBackOff Pods:
+=================================
+Error: Back-off restarting failed container
+======
+Three Scenarios:
+==================
+1. application inside the Container that prevents it from starting
+2. you miss configured the Container
+3. Livenessproble failed too many times
+
+
+                        
+                        Thank You --- Kumar Reddy
+
+
+
+Show Cluster Level Events:
+==========================
+
+Command1: kubectl get events --sort-by=.metadata.creationTimestamp
+=========
+
+
+Summary:
+========
+
+1. If pod didn't start - kubectl describe it too see events
+
+2. If pod is crashing - kubectl logs to see the logs
+
+3. Need to run commands inside the pod? - kubectl exec -it 
+
+
+
+
+
+
+
+

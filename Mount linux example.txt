@@ -1,0 +1,11 @@
+How to mount EBS volume and attach to Ec2 Instance:
+======================================================
+du -h	
+df -h
+lsblk
+file -s /dev/xvdf
+mkfs -t xfs /dev/xvdf
+file -s /dev/xvdf
+mkdir -p /mydata/apps/volume
+mount /dev/xvdf /apps/volume
+df -h

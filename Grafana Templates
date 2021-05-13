@@ -1,0 +1,29 @@
+Node Exporter:
+==============
+1860 Node-Exporter Full
+5174 No data
+405  - server metrics
+11074 - node_exporter for prometheus dashboard
+
+
+
+
+
+K8:
+=====
+10856     K8 Cluster Detail Dashboard
+6781      K8 Pod Overview
+12117     K8/Compute Resources/Namespace (Pods)
+12120     K8/Compute Resources/Pod
+12114     K8/Compute Resources/Cluster
+9614      Nginx Ingress Controller
+7249      Kubernetes Cluster
+5225      Kubernetes Deployments
+
+
+
+
+
+
+
+

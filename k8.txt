@@ -1,0 +1,141 @@
+1.vpc,subnet(public,private),igw,nat,route
+2.bastion
+3.iam role(adminstration access) attach to bastion
+4.tags
+	vpc----kubernetes.io/cluster/<clustername>
+		shared
+	public-subnet1-----kubernetes.io/role/elb
+			1
+		kubernetes.io/cluster/<clustername>
+			shared
+	private-subnet1-------kubernetes.io/role/internal-elb
+				1
+			kubernetes.io/cluster/<clustername>
+				shared	
+5.	useradd gold
+	passwd gold
+goldgold@1
+goldgold@1
+
+	useradd silver
+	passwd silver
+silversilver@1
+silversilver@1
+
+to check user
+-----
+cat /etc/passwd/
+or
+id gold
+id silver
+
+add the adduser to sudouser
+------
+visudo
+
+# %wheel        ALL=(ALL)       ALL
+change
+%wheel        ALL=(ALL)       ALL
+
+run commands
+usermod -aG wheel gold
+usermod -aG wheel silver
+
+
+vi /etc/ssh/sshd_config
+PermitRootLogin yes
+PasswordAuthentication yes
+
+to run command
+systemctl restart sshd
+
+
+---------------
+------------
+ec2 bastion login----sudo su -
+mkdir goud
+cd goud
+
+
+
+echo "# goud" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/maheswargoud/goud.git
+git push -u origin main
+
+
+vi index.html
+echo " this is html page"
+vi Dockerfile
+FROM httpd
+COPY index.html /usr/local/apache2/htdocs/
+
+git add
+git commit -m "second commit"
+git [push
+
+ecr repo create----goudcloud
+githuh---https url enter in git-----https 
+
+build now
+
+
+
+     ecr view push commands           
+sudo aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 349948765351.dkr.ecr.ap-south-1.amazonaws.com
+sudo docker build -t goudcloud .
+sudo docker tag goudcloud:latest 349948765351.dkr.ecr.ap-south-1.amazonaws.com/goudcloud:latest
+sudo docker push 349948765351.dkr.ecr.ap-south-1.amazonaws.com/goudcloud:latest
+
+this command ------jenkins--execute shelll---add 4 commands
+
+
+kubectl create ns goud
+kubectl get po
+
+yaml file create
+
+vi goud_deployment.yamls
+goud_deployment.yaml
+----------
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: goud-deployment
+  namespace: goud
+spec:
+  selector:
+    matchLabels:
+      app: goud
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: goud
+    spec:
+      containers:
+      - name: goud
+        image: 349948765351.dkr.ecr.ap-south-1.amazonaws.com/goudcloud:latest
+        ports:
+        - containerPort: 80
+
+-------------
+
+we change
+
+ctrl+h
+nginx  to goud replace
+name: goud-deployment
+namespace: goud
+image: 349948765351.dkr.ecr.ap-south-1.amazonaws.com/goudcloud:latest/
+
+--------------
+
+
+
+
+
+

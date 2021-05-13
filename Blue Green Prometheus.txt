@@ -1,0 +1,27 @@
+In Blue Green Deployment, you have TWO complete deployments.
+One is Blue deployment which is running and the 
+Green deployment to which you want to upgrade. 
+Once you swap the deployment from blue to green, 
+the traffic is directed to your new green deployment. 
+You can delete or save your old blue deployment for backup 
+until the green deployment is stable.
+
+
+In Rolling Deployment, you have only ONE complete deployment.
+Once you start upgrading your deployment. 
+The code is deployed in the subset of instances of the same deployment and 
+moves to another subset after completion.
+
+So both are different in various factors and you need to choose the deployment model
+based on the scenario. Blue/green deployment is not a subset of rolling deployments.
+
+
+
+
+
+Prometheus acts as the storage backend and Grafana as the interface for analysis and
+visualization. 
+Prometheus collects metrics from monitored targets by scraping metrics from 
+HTTP endpoints on these targets. ... 
+By adding Grafana as a visualization layer,
+we can easily set up a monitoring stack for our monitoring stack

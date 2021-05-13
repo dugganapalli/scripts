@@ -1,0 +1,28 @@
+sudo adduser newuser
+groups newuser
+usermod -aG sudo newuser
+sudo visudo 
+
+root    ALL=(ALL:ALL) ALL
+newuser ALL=(ALL:ALL) ALL
+
+sudo su - newuser
+
+sudo deluser newuser
+
+
+vi /etc/ssh/sshd_config
+
+PasswordAuthentication yes
+
+service ssh restart
+
+
+
+
+
+
+
+
+
+
